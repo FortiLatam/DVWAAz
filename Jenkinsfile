@@ -134,7 +134,7 @@ END FWB*/
                  script { 
                     sh 'sed -i "s/<API_FGT_TOKEN>/${API_FGT_TOKEN}/" tf-fgtvm/tf-fgt.tf'
                     sh 'sed -i "s/<SDN_NAME>/${SDN_NAME}/" tf-fgtvm/tf-fgt.tf'
-                    sh 'sed -i "s/<APP_NAME>/${APP_NAME}/" tf-fgtvm/tf-fgt.tf'
+                    sh 'sed -i "s/<TAG_NAME>/${TAG_NAME}/" tf-fgtvm/tf-fgt.tf'
                     sh 'sed -i "s/<DYN_ADDR_NAME>/${DYN_ADDR_NAME}/" tf-fgtvm/tf-fgt.tf'
                     sh 'sed -i "s/<FGT_IP>/${FGT_IP}/" tf-fgtvm/tf-fgt.tf'
                     sh 'sed -i "s/<FGT_PORT>/${FGT_PORT}/" tf-fgtvm/tf-fgt.tf'
