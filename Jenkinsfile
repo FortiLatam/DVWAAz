@@ -70,7 +70,7 @@ END SAST*/
 /*ADD to FWB*/
     stage('Deploy'){
             steps {
-                 sh 'scp -r -i ${SSH_KEY_PATH} . ${SSH_USER}@${SSH_HOST}:/opt/bitnami/apache/htdocs/'
+                 sh 'scp -r -i ${SSH_KEY_PATH} ./application/* ${SSH_USER}@${SSH_HOST}:/opt/bitnami/apache/htdocs/'
             }
     } 
 /*
