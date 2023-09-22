@@ -9,6 +9,9 @@ pipeline {
         APP_NAME="dvwa"
         API_FWB_TOKEN = credentials('FWB_TOKEN')
         API_FGT_TOKEN = credentials('FGT_TOKEN')
+        SSH_HOST = credentials('JSSH_HOST')
+        SSH_USER = credentials('JSSH_USER')
+        SSH_KEY_PATH = credentials('JSSH_PATH')
         CNAME_APP = "dvwa.fortixperts.com"
         ZONE_ID = "Z038024434JSU4YEEE1I7"
         SDN_NAME = "EKSSDN"
@@ -19,7 +22,7 @@ pipeline {
    
     stages {
     
-    stage('Logging into AWS ECR') {
+/*    stage('Logging into AWS ECR') {
             steps {
                 script {
                 sh """aws ecr-public get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${REPOSITORY_URI} """
@@ -27,7 +30,7 @@ pipeline {
                  
             }
     } 
-    
+ */   
     stage('Clone repository') { 
             steps { 
                 script{
@@ -35,7 +38,7 @@ pipeline {
                 }
             }
         }  
-/*SAST*/    
+/*SAST    
     stage('SAST'){
             steps {
                  sh 'env | grep -E "JENKINS_HOME|BUILD_ID|GIT_BRANCH|GIT_COMMIT" > /tmp/env'
@@ -43,8 +46,8 @@ pipeline {
                  sh 'docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_sast:latest'
             }
     }
-/*END SAST*/
-    // Building Docker images
+END SAST*/
+/*    // Building Docker images
     stage('Building image') {
       steps{
         script {
@@ -62,16 +65,14 @@ pipeline {
          }
         }
       }
+      */
 /*ADD to FWB*/
     stage('Deploy'){
             steps {
-                 sh 'sed -i "s/<TAG>/${IMAGE_TAG}-${BUILD_NUMBER}/" deployment.yml'
-                 sh 'sed -i "s/<APP_NAME>/${APP_NAME}/" deployment.yml'
-                 sh 'kubectl apply -f deployment.yml'
-                 sh 'sleep 30'
+                 sh 'scp -r -i ${SSH_KEY_PATH} . ${SSH_USER}@${SSH_HOST}:/opt/bitnami/apache/htdocs/'
             }
     } 
-
+/*
     stage('Add app to FortiWeb-Cloud'){
             steps {
                  script {
@@ -102,7 +103,7 @@ pipeline {
                  }
             }
     }
-/*END FWB*/
+END FWB*/
 /* Deploy and Change DNS Record WITHOUT FWB
 
     stage('Deploy'){
@@ -126,7 +127,7 @@ pipeline {
             }
     }
  END Change DNS Record WITHOUT FWB*/
-/*FGT*/
+/*FGT
     stage('Add FortiGate settings'){
             steps {
                  script { 
@@ -141,8 +142,8 @@ pipeline {
                  }
             }
     }
-/*END FGT*/
-/*DAST*/
+END FGT*/
+/*DAST
     stage('DAST'){
             steps {
                  sh 'env | grep -E "JENKINS_HOME|BUILD_ID|GIT_BRANCH|GIT_COMMIT" > /tmp/env'
@@ -150,7 +151,7 @@ pipeline {
                  sh 'docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_dast:latest'
             }
     }
-/*END DAST*/
+END DAST*/
   
 }
 }
