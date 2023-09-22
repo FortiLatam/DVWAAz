@@ -31,7 +31,7 @@ resource "fortios_firewall_policy" "fwpolrule" {
   name                        = "Allow <TAG_NAME> egress"
   schedule                    = "always"
   ssl_ssh_profile             = "deep-inspection"
-  dlp_profile                 = "demo"
+  dlp_profile                 = "Demo-DLP"
   status                      = "enable"
   utm_status                  = "enable"
   nat                         = "enable"
