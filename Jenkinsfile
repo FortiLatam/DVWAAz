@@ -7,6 +7,7 @@ pipeline {
         REPOSITORY_URI = "public.ecr.aws/f9n2h3p5/dvwapub"
         AWS_DEFAULT_REGION = "us-east-1"
         APP_NAME="dvwa"
+        TAG_NAME="fortinetday"
         API_FWB_TOKEN = credentials('FWB_TOKEN')
         API_FGT_TOKEN = credentials('FGT_TOKEN')
         SSH_HOST = credentials('JSSH_HOST')
@@ -14,9 +15,9 @@ pipeline {
         SSH_KEY_PATH = credentials('JSSH_PATH')
         CNAME_APP = "dvwa.fortixperts.com"
         ZONE_ID = "Z038024434JSU4YEEE1I7"
-        SDN_NAME = "EKSSDN"
-        DYN_ADDR_NAME = "DVWA_PODS"
-        FGT_IP = "34.204.90.236"
+        SDN_NAME = "AzureSDN"
+        DYN_ADDR_NAME = "DVWA_VM"
+        FGT_IP = "20.85.213.195"
         FGT_PORT = "8443"
     }
    
@@ -127,7 +128,7 @@ END FWB*/
             }
     }
  END Change DNS Record WITHOUT FWB*/
-/*FGT
+/*FGT*/
     stage('Add FortiGate settings'){
             steps {
                  script { 
@@ -142,7 +143,7 @@ END FWB*/
                  }
             }
     }
-END FGT*/
+/*END FGT*/
 /*DAST
     stage('DAST'){
             steps {

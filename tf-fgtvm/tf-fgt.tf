@@ -12,13 +12,13 @@ provider "fortios" {
   insecure     = "true"
 }
 
-resource "fortios_firewall_address" "k8sappaddr" {
+resource "fortios_firewall_address" "demoaddr" {
   color                = 3
   name                 = "<DYN_ADDR_NAME>"
   type                 = "dynamic"
   sdn                  = "<SDN_NAME>"
   sdn_addr_type        = "private"
-  filter               = "K8S_Label.app=<APP_NAME>"
+  filter               = "Tag.demo=<TAG_NAME>"
   visibility           = "enable"
 }
 
@@ -28,7 +28,7 @@ resource "fortios_firewall_policy" "fwpolrule" {
   inspection_mode             = "proxy"
   ips_sensor                  = "default"
   logtraffic                  = "utm"
-  name                        = "Allow <APP_NAME> egress"
+  name                        = "Allow <TAG_NAME> egress"
   schedule                    = "always"
   ssl_ssh_profile             = "deep-inspection"
   dlp_profile                 = "demo"
@@ -42,10 +42,10 @@ resource "fortios_firewall_policy" "fwpolrule" {
     name = "HTTPS"
   }
   dstintf {
-      name = "port1"
+      name = "extvxlan"
   }
   srcintf {
-      name = "gwlb1-tunnels"
+      name = "intvxlan"
   }
   dstaddr {
     name = "all"
@@ -53,11 +53,11 @@ resource "fortios_firewall_policy" "fwpolrule" {
   srcaddr {
       name = "<DYN_ADDR_NAME>"
   }
-    depends_on = [fortios_firewall_address.k8sappaddr]
+    depends_on = [fortios_firewall_address.demoaddr]
 }
 resource "fortios_firewall_security_policyseq" "fwpolorder" {
   policy_src_id         = fortios_firewall_policy.fwpolrule.policyid
-  policy_dst_id         = 6
+  policy_dst_id         = 3
   alter_position        = "before"
   enable_state_checking = true
 }
