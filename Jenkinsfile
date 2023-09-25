@@ -55,7 +55,7 @@ pipeline {
                  sh 'scp -r -i ${SSH_KEY_PATH} ./application/* ${SSH_USER}@${SSH_HOST}:/opt/bitnami/apache/htdocs/'
             }
     } 
-/*ADD to FWB*/
+/*ADD to FWB
     stage('Add app to FortiWeb-Cloud'){
             steps {
                  script {
@@ -87,7 +87,7 @@ pipeline {
             }
     }
 /*END FWB*/
-/*FGT*/
+/*FGT
     stage('Add FortiGate settings'){
             steps {
                  script { 
