@@ -87,29 +87,6 @@ pipeline {
             }
     }
 /*END FWB*/
-/* Deploy and Change DNS Record WITHOUT FWB
-
-    stage('Deploy'){
-            steps {
-                 sh 'sed -i "s/<TAG>/${IMAGE_TAG}-${BUILD_NUMBER}/" deployment-public.yml'
-                 sh 'sed -i "s/<APP_NAME>/${APP_NAME}/" deployment-public.yml'
-                 sh 'kubectl apply -f deployment-public.yml'
-                 sh 'sleep 30'
-            }
-    } 
-
-    stage('Change DNS record'){
-            steps {
-                 script { 
-                    sh 'sed -i "s/<CNAME_APP>/${CNAME_APP}/" r53app.json'
-                    sh '''#!/bin/bash
-                    CNAME_FWB=`kubectl get svc dvwa --output="jsonpath={.status.loadBalancer.ingress[0].hostname}"`
-                    sed -i "s/<CNAME_FWB>/${CNAME_FWB}/" r53app.json '''
-                    sh 'aws route53 change-resource-record-sets --hosted-zone-id ${ZONE_ID} --change-batch file://r53app.json --profile master'
-                 }
-            }
-    }
- END Change DNS Record WITHOUT FWB*/
 /*FGT*/
     stage('Add FortiGate settings'){
             steps {
@@ -126,7 +103,7 @@ pipeline {
             }
     }
 /*END FGT*/
-/*DAST*/
+/*DAST
     stage('DAST'){
             steps {
                  sh 'env | grep -E "JENKINS_HOME|BUILD_ID|GIT_BRANCH|GIT_COMMIT" > /tmp/env'
