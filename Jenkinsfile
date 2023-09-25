@@ -39,7 +39,7 @@ pipeline {
                 }
             }
         }  
-/*SAST    
+/*SAST */   
     stage('SAST'){
             steps {
                  sh 'env | grep -E "JENKINS_HOME|BUILD_ID|GIT_BRANCH|GIT_COMMIT" > /tmp/env'
@@ -47,38 +47,20 @@ pipeline {
                  sh 'docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_sast:latest'
             }
     }
-END SAST*/
-/*    // Building Docker images
-    stage('Building image') {
-      steps{
-        script {
-          dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}-${env.BUILD_NUMBER}"
-        }
-      }
-    }
-   
-    // Uploading Docker images into AWS ECR
-    stage('Pushing to ECR') {
-     steps{  
-         script {
-                sh """docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG}-${env.BUILD_NUMBER} ${REPOSITORY_URI}:$IMAGE_TAG-${env.BUILD_NUMBER}"""
-                sh """docker push ${REPOSITORY_URI}:${IMAGE_TAG}-${env.BUILD_NUMBER}"""
-         }
-        }
-      }
-      */
-/*ADD to FWB*/
+/*END SAST*/
+
+
     stage('Deploy'){
             steps {
                  sh 'scp -r -i ${SSH_KEY_PATH} ./application/* ${SSH_USER}@${SSH_HOST}:/opt/bitnami/apache/htdocs/'
             }
     } 
-/*
+/*ADD to FWB*/
     stage('Add app to FortiWeb-Cloud'){
             steps {
                  script {
                     sh '''#!/bin/bash
-                    EXTERNAL_IP=`kubectl get svc dvwa --output="jsonpath={.status.loadBalancer.ingress[0].hostname}"`
+                    EXTERNAL_IP="20.241.219.83"
                     sed -i "s/<EXTERNAL_LBIP>/$EXTERNAL_IP/" tf-fwbcloud/tf-fwb.tf
                     sed -i "s/<DAST_URL>/$EXTERNAL_IP/" fdevsec.yaml''' 
                  }
@@ -104,7 +86,7 @@ END SAST*/
                  }
             }
     }
-END FWB*/
+/*END FWB*/
 /* Deploy and Change DNS Record WITHOUT FWB
 
     stage('Deploy'){
@@ -144,7 +126,7 @@ END FWB*/
             }
     }
 /*END FGT*/
-/*DAST
+/*DAST*/
     stage('DAST'){
             steps {
                  sh 'env | grep -E "JENKINS_HOME|BUILD_ID|GIT_BRANCH|GIT_COMMIT" > /tmp/env'
@@ -152,7 +134,7 @@ END FWB*/
                  sh 'docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_dast:latest'
             }
     }
-END DAST*/
+/*END DAST*/
   
 }
 }
