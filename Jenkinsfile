@@ -82,7 +82,7 @@ pipeline {
                     sh '''#!/bin/bash
                     CNAME_FWB=`terraform -chdir=tf-fwbcloud/ output -json | jq .cname.value -r |tr -d '"|]|['`
                     sed -i "s/<CNAME_FWB>/${CNAME_FWB}/" r53app.json '''
-                    sh 'aws route53 change-resource-record-sets --hosted-zone-id ${ZONE_ID} --change-batch file://r53app.json --profile master'
+                    sh 'aws route53 change-resource-record-sets --hosted-zone-id ${ZONE_ID} --change-batch file://r53app.json '
                  }
             }
     }
