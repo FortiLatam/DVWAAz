@@ -18,8 +18,9 @@ resource "fortios_firewall_address" "demoaddr" {
   type                 = "dynamic"
   sdn                  = "<SDN_NAME>"
   sdn_addr_type        = "private"
-  filter               = "Tag.demo=<TAG_NAME>"
+  filter               = "LoadBalancer=<TAG_NAME>"
   visibility           = "enable"
+  sdn-addr-type        = "public"
 }
 
 resource "fortios_firewall_policy" "fwpolrule" {

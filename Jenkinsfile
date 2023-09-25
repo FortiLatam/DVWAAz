@@ -7,7 +7,7 @@ pipeline {
         REPOSITORY_URI = "public.ecr.aws/f9n2h3p5/dvwapub"
         AWS_DEFAULT_REGION = "us-east-1"
         APP_NAME="dvwa"
-        TAG_NAME="fortinetday"
+        TAG_NAME="webLoadBalancer"
         API_FWB_TOKEN = credentials('FWB_TOKEN')
         API_FGT_TOKEN = credentials('FGT_TOKEN')
         SSH_HOST = credentials('JSSH_HOST')
