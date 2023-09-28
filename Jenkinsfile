@@ -30,7 +30,7 @@ pipeline {
                 }
             }
         }  
-/*SAST   
+/*SAST */  
     stage('SAST'){
             steps {
                  sh 'env | grep -E "JENKINS_HOME|BUILD_ID|GIT_BRANCH|GIT_COMMIT" > /tmp/env'
