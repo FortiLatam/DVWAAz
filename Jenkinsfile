@@ -7,7 +7,7 @@ pipeline {
         REPOSITORY_URI = "public.ecr.aws/f9n2h3p5/dvwapub"
         AWS_DEFAULT_REGION = "us-east-1"
         APP_NAME="dvwa"
-        TAG_NAME="webLoadBalancer"
+        TAG_NAME="dvwaapp"
         API_FWB_TOKEN = credentials('FWB_TOKEN')
         API_FGT_TOKEN = credentials('FGT_TOKEN')
         SSH_HOST = credentials('JSSH_HOST')
@@ -15,7 +15,8 @@ pipeline {
         SSH_KEY_PATH = credentials('JSSH_PATH')
         CNAME_APP = "dvwa.fortixperts.com"
         ZONE_ID = "Z038024434JSU4YEEE1I7"
-        SDN_NAME = "AzureSDN"
+        //SDN_NAME = "AzureSDN"
+        SDN_NAME = "AwsSDN"
         DYN_ADDR_NAME = "DVWA_VM"
         FGT_IP = "54.193.184.106"
         FGT_PORT = "443"
