@@ -19,7 +19,7 @@ resource "fortios_firewall_address" "demoaddr" {
   sdn                  = "<SDN_NAME>"
   filter               = "Tag.app=<TAG_NAME>"
   visibility           = "enable"
-  sdn_addr_type        = "public"
+  sdn_addr_type        = "private"
 }
 
 resource "fortios_firewall_policy" "fwpolrule" {
@@ -57,7 +57,7 @@ resource "fortios_firewall_policy" "fwpolrule" {
 }
 resource "fortios_firewall_security_policyseq" "fwpolorder" {
   policy_src_id         = fortios_firewall_policy.fwpolrule.policyid
-  policy_dst_id         = 3
+  policy_dst_id         = 4
   alter_position        = "before"
   enable_state_checking = true
 }
@@ -96,8 +96,8 @@ resource "fortios_firewall_policy" "fwpolrule2" {
     depends_on = [fortios_firewall_address.demoaddr]
 }
 resource "fortios_firewall_security_policyseq" "fwpolorder2" {
-  policy_src_id         = fortios_firewall_policy.fwpolrule.policyid
-  policy_dst_id         = 3
+  policy_src_id         = fortios_firewall_policy.fwpolrule2.policyid
+  policy_dst_id         = 5
   alter_position        = "before"
   enable_state_checking = true
 }
