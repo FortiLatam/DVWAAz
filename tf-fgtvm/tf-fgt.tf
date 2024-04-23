@@ -17,7 +17,7 @@ resource "fortios_firewall_address" "demoaddr" {
   name                 = "<DYN_ADDR_NAME>"
   type                 = "dynamic"
   sdn                  = "<SDN_NAME>"
-  filter               = "LoadBalancer=<TAG_NAME>"
+  filter               = "Tag.app=<TAG_NAME>"
   visibility           = "enable"
   sdn_addr_type        = "public"
 }
@@ -42,10 +42,12 @@ resource "fortios_firewall_policy" "fwpolrule" {
     name = "HTTPS"
   }
   dstintf {
-      name = "extvxlan"
+      name = "geneve-az1",
+      name = "geneve-az2"
   }
   srcintf {
-      name = "intvxlan"
+      name = "geneve-az1",
+      name = "geneve-az2"
   }
   dstaddr {
     name = "all"
