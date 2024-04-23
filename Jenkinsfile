@@ -48,12 +48,12 @@ END SAST*/
                 //sh 'scp -r -i ${SSH_KEY_PATH} ./application/* ${SSH_USER}@${SSH_HOST}:/usr/share/httpd/noindex/'
             }
     } 
-/*ADD to FWB
+/*ADD to FWB*/
     stage('Add app to FortiWeb-Cloud'){
             steps {
                  script {
                     sh '''#!/bin/bash
-                    EXTERNAL_IP="20.241.219.83"
+                    EXTERNAL_IP="54.176.64.192"
                     sed -i "s/<EXTERNAL_LBIP>/$EXTERNAL_IP/" tf-fwbcloud/tf-fwb.tf
                     sed -i "s/<DAST_URL>/$EXTERNAL_IP/" fdevsec.yaml''' 
                  }
@@ -79,7 +79,7 @@ END SAST*/
                  }
             }
     }
-END FWB*/
+/*END FWB*/
 /*FGT*/
     stage('Add FortiGate settings'){
             steps {
