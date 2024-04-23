@@ -17,8 +17,8 @@ pipeline {
         ZONE_ID = "Z038024434JSU4YEEE1I7"
         SDN_NAME = "AzureSDN"
         DYN_ADDR_NAME = "DVWA_VM"
-        FGT_IP = "20.85.213.195"
-        FGT_PORT = "8443"
+        FGT_IP = "54.193.184.106"
+        FGT_PORT = "443"
     }
    
     stages {
