@@ -6,15 +6,15 @@ id:
 
 scanners:
   - sast
-  - dast
+#  - dast
   - secret
   - sca
   - iac
   - container   
     
-dast:
-  url: http://<DAST_URL>/
-  full_scan: true #true|false
+#dast:
+#  url: http://<DAST_URL>/
+#  full_scan: true #true|false
 
 fail_pipeline:
   risk_rating: 9
