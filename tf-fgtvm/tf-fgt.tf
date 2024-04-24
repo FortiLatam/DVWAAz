@@ -56,7 +56,7 @@ resource "fortios_firewall_policy" "fwpolrule" {
 }
 resource "fortios_firewall_security_policyseq" "fwpolorder" {
   policy_src_id         = fortios_firewall_policy.fwpolrule.policyid
-  policy_dst_id         = 4
+  policy_dst_id         = 3
   alter_position        = "before"
   enable_state_checking = true
 }
