@@ -31,7 +31,7 @@ pipeline {
                 }
             }
         }  
-/*SAST*/   
+/*SAST   
     stage('SAST'){
             steps {
                  sh 'env | grep -E "JENKINS_HOME|BUILD_ID|GIT_BRANCH|GIT_COMMIT" > /tmp/env'
@@ -39,7 +39,7 @@ pipeline {
                  sh 'docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_sast:latest'
             }
     }
-/*END SAST*/
+END SAST*/
 
 
     stage('Deploy'){
@@ -48,7 +48,7 @@ pipeline {
                 //sh 'scp -r -i ${SSH_KEY_PATH} ./application/* ${SSH_USER}@${SSH_HOST}:/usr/share/httpd/noindex/'
             }
     } 
-/*ADD to FWB*/
+/*ADD to FWB
     stage('Add app to FortiWeb-Cloud'){
             steps {
                  script {
@@ -79,7 +79,7 @@ pipeline {
                  }
             }
     }
-/*END FWB*/
+END FWB*/
 /*FGT*/
     stage('Add FortiGate settings'){
             steps {
