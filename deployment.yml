@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
       - name: dvwa
-        image: public.ecr.aws/f9n2h3p5/dvwapub:<TAG>
+        image: metabase/metabase:latest
         imagePullPolicy: "Always"
   selector:
     matchLabels:
