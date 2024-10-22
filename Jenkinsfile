@@ -16,7 +16,7 @@ pipeline {
         CNAME_APP = "dvwa.fortixperts.com"
         ZONE_ID = "Z038024434JSU4YEEE1I7"
         //SDN_NAME = "AzureSDN"
-        SDN_NAME = "AwsSDN"
+        SDN_NAME = "AWS"
         DYN_ADDR_NAME = "DVWA_VM"
         FGT_IP = "3.230.80.126"
         FGT_PORT = "443"
