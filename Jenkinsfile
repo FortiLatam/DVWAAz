@@ -53,7 +53,7 @@ END SAST*/
             steps {
                  script {
                     sh '''#!/bin/bash
-                    EXTERNAL_IP="54.176.64.192"
+                    EXTERNAL_IP="18.215.155.103"
                     sed -i "s/<EXTERNAL_LBIP>/$EXTERNAL_IP/" tf-fwbcloud/tf-fwb.tf
                     sed -i "s/<DAST_URL>/$EXTERNAL_IP/" fdevsec.yaml''' 
                  }
