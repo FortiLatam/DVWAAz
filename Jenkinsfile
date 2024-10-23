@@ -48,7 +48,7 @@ END SAST*/
                 //sh 'scp -r -i ${SSH_KEY_PATH} ./application/* ${SSH_USER}@${SSH_HOST}:/usr/share/httpd/noindex/'
             }
     } 
-/*ADD to FWB*/
+/*ADD to FWB
     stage('Add app to FortiWeb-Cloud'){
             steps {
                  script {
@@ -79,8 +79,8 @@ END SAST*/
                  }
             }
     }
-/*END FWB*/
-/*FGT*/
+END FWB*/
+/*FGT
     stage('Add FortiGate settings'){
             steps {
                  script { 
@@ -95,7 +95,7 @@ END SAST*/
                  }
             }
     }
-/*END FGT*/
+END FGT*/
 /*DAST
     stage('DAST'){
             steps {
