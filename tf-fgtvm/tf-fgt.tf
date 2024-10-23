@@ -34,6 +34,7 @@ resource "fortios_firewall_policy" "fwpolrule" {
   dlp_profile                 = "Demo-DLP"
   status                      = "enable"
   utm_status                  = "enable"
+  nat                         = "enable"
     service {
     name = "HTTP"
   }
