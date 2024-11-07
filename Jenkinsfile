@@ -18,7 +18,7 @@ pipeline {
         //SDN_NAME = "AzureSDN"
         SDN_NAME = "AWS"
         DYN_ADDR_NAME = "DVWA_VM"
-        FGT_IP = "52.20.252.9"
+        FGT_IP = "XXXXXXXX"
         FGT_PORT = "443"
     }
    
@@ -53,7 +53,7 @@ END SAST*/
             steps {
                  script {
                     sh '''#!/bin/bash
-                    EXTERNAL_IP="54.227.4.166"
+                    EXTERNAL_IP="XXXXXXX"
                     sed -i "s/<EXTERNAL_LBIP>/$EXTERNAL_IP/" tf-fwbcloud/tf-fwb.tf
                     sed -i "s/<DAST_URL>/$EXTERNAL_IP/" fdevsec.yaml''' 
                  }
