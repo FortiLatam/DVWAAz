@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "fortiappseccloud" {
-  hostname   = "api.fortiweb-cloud.com"
+  hostname   = "api.appsec.fortinet.com"
   api_token  = "<API_FWB_TOKEN>"
 }
 
