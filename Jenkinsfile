@@ -41,13 +41,16 @@ pipeline {
     }
 END SAST*/
 
-
+/*
     stage('Deploy'){
             steps {
                 sh 'scp -r -i ${SSH_KEY_PATH} ./application/* ${SSH_USER}@${SSH_HOST}:/opt/bitnami/apache/htdocs/'
                 //sh 'scp -r -i ${SSH_KEY_PATH} ./application/* ${SSH_USER}@${SSH_HOST}:/usr/share/httpd/noindex/'
             }
     } 
+
+*/
+        
 /*ADD to FWB*/
     stage('Add app to FortiWeb-Cloud'){
             steps {
