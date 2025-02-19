@@ -18,7 +18,7 @@ pipeline {
         //SDN_NAME = "AzureSDN"
         SDN_NAME = "AWS"
         DYN_ADDR_NAME = "DVWA_VM"
-        FGT_IP = "XXXXXXXX"
+        FGT_IP = credentials('FGT_IP')
         FGT_PORT = "443"
     }
    
