@@ -12,7 +12,7 @@ provider "fortiappseccloud" {
   api_token  = "<API_FWB_TOKEN>"
 }
 
-resource "fortiappseccloud_app" "app_<APP_NAME>" {
+resource "fortiappseccloud_waf_app" "app_<APP_NAME>" {
   app_name    = "webapp_<APP_NAME>"
   domain_name = "<CNAME_APP>"
   app_service = {
@@ -28,5 +28,5 @@ resource "fortiappseccloud_app" "app_<APP_NAME>" {
 }
 
 output "cname" {
-  value = fortiappseccloud.app_<APP_NAME>.cname
+  value = fortiappseccloud_waf_app.app_<APP_NAME>.cname
 }
