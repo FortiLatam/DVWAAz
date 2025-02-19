@@ -1,18 +1,18 @@
 terraform {
   required_providers {
-    fortiwebcloud = {
-      source  = "fortinet/terraform/fortiwebcloud"
-      version = "1.0.4"
+    fortiappseccloud = {
+      source  = "fortinet/fortiappseccloud"
+      version = "1.0.0"
     }
   }
 }
 
-provider "fortiwebcloud" {
+provider "fortiappseccloud" {
   hostname   = "api.fortiweb-cloud.com"
   api_token  = "<API_FWB_TOKEN>"
 }
 
-resource "fortiwebcloud_app" "app_<APP_NAME>" {
+resource "fortiappseccloud_app" "app_<APP_NAME>" {
   app_name    = "webapp_<APP_NAME>"
   domain_name = "<CNAME_APP>"
   app_service = {
@@ -28,5 +28,5 @@ resource "fortiwebcloud_app" "app_<APP_NAME>" {
 }
 
 output "cname" {
-  value = fortiwebcloud_app.app_<APP_NAME>.cname
+  value = fortiappseccloud.app_<APP_NAME>.cname
 }
