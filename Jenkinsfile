@@ -20,6 +20,7 @@ pipeline {
         DYN_ADDR_NAME = "DVWA_VM"
         FGT_IP = credentials('FGT_IP')
         FGT_PORT = "443"
+        EXTERNAL_IP="44.220.146.94"
     }
    
     stages {
@@ -56,7 +57,7 @@ END SAST*/
             steps {
                  script {
                     sh '''#!/bin/bash
-                    EXTERNAL_IP="XXXXXXX"
+                    
                     sed -i "s/<EXTERNAL_LBIP>/$EXTERNAL_IP/" tf-fwbcloud/tf-fwb.tf
                     sed -i "s/<DAST_URL>/$EXTERNAL_IP/" fdevsec.yaml''' 
                  }
